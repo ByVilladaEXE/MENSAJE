@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para Iliana 🌸</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============================
+       CANVAS: Disco + Pétalos
+  ============================= -->
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- ============================
+       BOTÓN FLOTANTE DE MÚSICA
+  ============================= -->
+  <button class="music-btn" id="musicBtn" title="Música">
+    <span class="music-icon" id="musicIcon">🎵</span>
+  </button>
+
+  <!-- AUDIO — Pon tu archivo musica.mp3 en la misma carpeta -->
+  <audio id="bgMusic" loop>
+    <source src="musica.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- ============================
+       SECCIÓN HERO
+  ============================= -->
+  <section class="hero" id="hero">
+
+    <div class="disco-ring disco-ring-1"></div>
+    <div class="disco-ring disco-ring-2"></div>
+    <div class="disco-ring disco-ring-3"></div>
+
+    <div class="hero-content">
+      <p class="hero-subtitle fade-in-up delay-1">💌 Tengo algo importante que decirte…</p>
+
+      <h1 class="hero-title fade-in-up delay-2">
+        <span class="name-letter" style="--i:0">I</span><span class="name-letter" style="--i:1">l</span><span class="name-letter" style="--i:2">i</span><span class="name-letter" style="--i:3">a</span><span class="name-letter" style="--i:4">n</span><span class="name-letter" style="--i:5">a</span>
+      </h1>
+
+      <!-- Partículas Hello Kitty alrededor del nombre -->
+      <div class="kitty-particles" id="kittyParticles" aria-hidden="true"></div>
+
+      <div class="counter-wrap fade-in-up delay-3">
+        <p class="counter-label">Llevamos</p>
+        <p class="counter-days" id="dayCount">…</p>
+        <p class="counter-label">días juntos 🌷</p>
+      </div>
+
+      <a href="#pregunta" class="scroll-cta fade-in-up delay-4">
+        <span>Sigue leyendo</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================
+       SECCIÓN RAZONES
+  ============================= -->
+  <section class="reasons" id="reasons">
+    <h2 class="section-title">¿Por qué me gustas?</h2>
+    <p class="section-sub">Podría escribir una lista infinita, pero aquí van algunas…</p>
+
+    <div class="cards-grid">
+
+      <div class="reason-card" data-reveal>
+        <div class="card-icon">✨</div>
+        <h3>Tu actitud</h3>
+        <p>Desde el primer dia que comencé a hablar contigo, me pareciste una chica super interesante. La manera en la que actuas,hablas y piensas me enamoraron</p>
+      </div>
+
+      <div class="reason-card" data-reveal>
+        <div class="card-icon">👀</div>
+        <h3>Ttu voz</h3>
+        <p>Cada que escucho um audio tuyo, me siento tranquilo, feliz y seguro.</p>
+      </div>
+
+      <div class="reason-card" data-reveal>
+        <div class="card-icon">🌸</div>
+        <h3>Tu forma de ser</h3>
+        <p>Eres auténtica, única, y eso me fascina más de lo que imaginas.</p>
+      </div>
+
+      <div class="reason-card" data-reveal>
+        <div class="card-icon">💬</div>
+        <h3>Tus conversaciones</h3>
+        <p>Hablar contigo nunca aburre. Siempre quiero un mensaje tuyo, aunque sea lo mas irrelevante del mundo, para mi se vuelve lo más importante en mis días.</p>
+      </div>
+
+      <div class="reason-card" data-reveal>
+        <div class="card-icon">🤍</div>
+        <h3>Tu cuerpo</h3>
+        <p>Esa complexión delgadita, esos ojitos, esa nariz, esos labios, ese cabello, ese cuerpito tuyo, me encanta, me enloquece y eres toda una diosa para mí.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================
+       SECCIÓN PREGUNTA
+  ============================= -->
+  <section class="pregunta" id="pregunta">
+    <div class="pregunta-inner">
+      <div class="pregunta-deco">🌹</div>
+      <h2 class="pregunta-title">¿Quieres ser<br/>mi novia?</h2>
+      <p class="pregunta-sub">Piénsalo bien… aunque ya sé que la respuesta es sí 😏</p>
+
+      <div class="btns-wrap" id="btnsWrap">
+        <button class="btn-si" id="btnSi" onclick="siClicked()">
+          💖 ¡Sí!
+        </button>
+        <button class="btn-no" id="btnNo">
+          No…
+        </button>
+      </div>
+
+      <!-- Mensaje éxito (oculto al inicio) -->
+      <div class="success-msg" id="successMsg">
+        <div class="success-emoji">🎉</div>
+        <h2>¡Esoooooooo mi bebé!</h2>
+        <p>Sabía que dirías que sí 💕</p>
+        <p class="success-date">Desde hoy, mi corazón es todo tuyo.</p>
+      </div>
+    </div>
+
+    <!-- Canvas confeti -->
+    <canvas id="confettiCanvas"></canvas>
+  </section>
+
+  <!-- ============================
+       FOOTER
+  ============================= -->
+  <footer class="site-footer">
+    <p>Hecho con todo el amor del mundo, solo para ti 🌷</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
