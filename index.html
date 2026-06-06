@@ -29,6 +29,22 @@
   </audio>
 
   <!-- ============================
+       OVERLAY DE BIENVENIDA
+       Los navegadores móviles bloquean el autoplay
+       sin gesto previo del usuario. Este overlay
+       es el truco: al tocar "Abrir" se inicia la música
+       y desaparece sin que el usuario lo note como
+       una barrera — solo lo ve como la intro.
+  ============================= -->
+  <div class="welcome-overlay" id="welcomeOverlay">
+    <div class="welcome-box">
+      <div class="welcome-rose">🌹</div>
+      <p class="welcome-text">Hay algo especial<br/>esperándote aquí…</p>
+      <button class="welcome-btn" id="welcomeBtn">Abrir 💌</button>
+    </div>
+  </div>
+
+  <!-- ============================
        SECCIÓN HERO
   ============================= -->
   <section class="hero" id="hero">
@@ -53,7 +69,7 @@
         <p class="counter-label">días juntos 🌷</p>
       </div>
 
-      <a href="#pregunta" class="scroll-cta fade-in-up delay-4">
+      <a href="#reasons" class="scroll-cta fade-in-up delay-4">
         <span>Sigue leyendo</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       </a>
@@ -71,14 +87,14 @@
 
       <div class="reason-card" data-reveal>
         <div class="card-icon">✨</div>
-        <h3>Tu actitud</h3>
-        <p>Desde el primer dia que comencé a hablar contigo, me pareciste una chica super interesante. La manera en la que actuas,hablas y piensas me enamoraron</p>
+        <h3>Tu personalidad</h3>
+        <p>Desde el primer dia que te conocí, me enamoré de tu manera de pensar, hablar y expresarte.</p>
       </div>
 
       <div class="reason-card" data-reveal>
         <div class="card-icon">👀</div>
-        <h3>Ttu voz</h3>
-        <p>Cada que escucho um audio tuyo, me siento tranquilo, feliz y seguro.</p>
+        <h3>Tu voz</h3>
+        <p>Cada que escucho tus audios, me siento feliz, tranquilo y seguro.</p>
       </div>
 
       <div class="reason-card" data-reveal>
@@ -90,13 +106,13 @@
       <div class="reason-card" data-reveal>
         <div class="card-icon">💬</div>
         <h3>Tus conversaciones</h3>
-        <p>Hablar contigo nunca aburre. Siempre quiero un mensaje tuyo, aunque sea lo mas irrelevante del mundo, para mi se vuelve lo más importante en mis días.</p>
+        <p>Hablar contigo nunca aburre. Siempre quiero hablar todo el día contigo.</p>
       </div>
 
       <div class="reason-card" data-reveal>
         <div class="card-icon">🤍</div>
         <h3>Tu cuerpo</h3>
-        <p>Esa complexión delgadita, esos ojitos, esa nariz, esos labios, ese cabello, ese cuerpito tuyo, me encanta, me enloquece y eres toda una diosa para mí.</p>
+	<p>Me fascina extremadamente tus ojos, tu nariz, tus labios, tu cabello, ese cuerpito tan perfecto que tienes.</p>
       </div>
 
     </div>
@@ -123,9 +139,9 @@
       <!-- Mensaje éxito (oculto al inicio) -->
       <div class="success-msg" id="successMsg">
         <div class="success-emoji">🎉</div>
-        <h2>¡Esoooooooo mi bebé!</h2>
+        <h2>¡Eres mi novia!</h2>
         <p>Sabía que dirías que sí 💕</p>
-        <p class="success-date">Desde hoy, mi corazón es todo tuyo.</p>
+        <p class="success-date">Desde hoy, todo es nuestro.</p>
       </div>
     </div>
 
@@ -143,4 +159,3 @@
   <script src="script.js"></script>
 </body>
 </html>
- 

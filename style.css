@@ -121,10 +121,14 @@ body {
 
 .hero-subtitle {
   font-family: var(--font-script);
-  font-size: clamp(1.1rem, 4vw, 1.4rem);
+  font-size: clamp(0.85rem, 3.5vw, 1.4rem);
   color: var(--rose);
   margin-bottom: 16px;
   letter-spacing: 0.02em;
+  /* Evitar que se salga del contenedor en pantallas pequeñas */
+  white-space: normal;
+  word-break: break-word;
+  padding: 0 8px;
 }
 
 /* Nombre con letras animadas */
@@ -522,4 +526,78 @@ body {
 @media (pointer: coarse) {
   /* Touch — el botón No escapa más despacio */
   .btn-no { transition: left 0.25s ease, top 0.25s ease, opacity 0.15s; }
+}
+
+/* ===========================================
+   WELCOME OVERLAY (arranque de música)
+=========================================== */
+.welcome-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg,
+    rgba(252, 228, 236, 0.97) 0%,
+    rgba(232, 245, 233, 0.97) 100%
+  );
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+.welcome-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.welcome-box {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 0 32px;
+  animation: fadeInUp 0.7s ease both;
+}
+
+.welcome-rose {
+  font-size: 4rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.welcome-text {
+  font-family: var(--font-title);
+  font-style: italic;
+  font-size: clamp(1.4rem, 6vw, 2rem);
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.welcome-btn {
+  font-family: var(--font-script);
+  font-size: clamp(1.1rem, 5vw, 1.4rem);
+  padding: 16px 48px;
+  border: none;
+  border-radius: 60px;
+  background: linear-gradient(135deg, var(--pink-deep), var(--rose));
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 6px 28px rgba(233, 30, 140, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  overflow: hidden;
+}
+.welcome-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+}
+.welcome-btn:hover,
+.welcome-btn:active {
+  transform: scale(1.06);
+  box-shadow: 0 10px 36px rgba(233, 30, 140, 0.55);
 }

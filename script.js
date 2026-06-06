@@ -372,53 +372,60 @@ function launchConfetti() {
 
 
 /* -----------------------------------------------
-   7. MÚSICA DE FONDO
-   — Pon tu archivo "musica.mp3" en la misma carpeta
+   7. MÚSICA DE FONDO + WELCOME OVERLAY
+   — Los navegadores móviles bloquean el autoplay
+     a menos que haya un gesto del usuario primero.
+   — Solución: overlay de bienvenida que al cerrarse
+     activa la música garantizando el gesto.
 ----------------------------------------------- */
 (function initMusic() {
-  const audio  = document.getElementById('bgMusic');
-  const btn    = document.getElementById('musicBtn');
-  const icon   = document.getElementById('musicIcon');
+  const audio   = document.getElementById('bgMusic');
+  const btn     = document.getElementById('musicBtn');
+  const icon    = document.getElementById('musicIcon');
+  const overlay = document.getElementById('welcomeOverlay');
+  const openBtn = document.getElementById('welcomeBtn');
 
-  if (!audio || !btn) return;
+  if (!audio || !btn || !overlay || !openBtn) return;
 
   let playing = false;
 
-  function tryPlay() {
-    const promise = audio.play();
-    if (promise !== undefined) {
-      promise
-        .then(() => {
-          playing = true;
-          icon.textContent = '🎵';
-          btn.classList.remove('paused');
-        })
-        .catch(() => {
-          // Autoplay bloqueado: el usuario debe presionar el botón
-          playing = false;
-          icon.textContent = '▶️';
-          btn.classList.add('paused');
-          btn.title = 'Toca para activar música';
-        });
+  function startMusic() {
+    audio.volume = 0;
+    const p = audio.play();
+    if (p !== undefined) {
+      p.then(() => {
+        playing = true;
+        icon.textContent = '🎵';
+        btn.classList.remove('paused');
+        // Fade in suave del volumen
+        let vol = 0;
+        const fadeIn = setInterval(() => {
+          vol = Math.min(1, vol + 0.04);
+          audio.volume = vol;
+          if (vol >= 1) clearInterval(fadeIn);
+        }, 80);
+      }).catch(() => {
+        // No debería llegar aquí porque ya hay gesto,
+        // pero por si acaso dejamos el botón flotante visible
+        playing = false;
+        icon.textContent = '▶️';
+        btn.classList.add('paused');
+      });
     }
   }
 
-  // Intento de autoplay al cargar
-  window.addEventListener('load', tryPlay);
+  // Al presionar "Abrir" → cerrar overlay + arrancar música
+  function handleOpen() {
+    overlay.classList.add('hidden');
+    startMusic();
+  }
 
-  // Alternativa: intentar en primer toque en cualquier parte de la página
-  document.addEventListener('touchstart', function firstTouch() {
-    if (!playing) tryPlay();
-    document.removeEventListener('touchstart', firstTouch);
-  }, { once: true });
-
-  document.addEventListener('click', function firstClick() {
-    if (!playing) tryPlay();
-    document.removeEventListener('click', firstClick);
-  }, { once: true });
+  openBtn.addEventListener('click',      handleOpen);
+  openBtn.addEventListener('touchstart', (e) => { e.preventDefault(); handleOpen(); }, { passive: false });
 
   // Botón flotante pausa / reanuda
-  btn.addEventListener('click', () => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
     if (playing) {
       audio.pause();
       playing = false;
